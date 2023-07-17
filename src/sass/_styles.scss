@@ -21,7 +21,7 @@ body {
   overflow: hidden;
 }
 
-.loader-wrap {
+.loader-wrap, .error {
   position: fixed;
   top: 0;
   left: 0;
@@ -41,8 +41,27 @@ body {
   margin-bottom: 20px;
 }
 
-.cat-info{
+.reload-btn {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ffffff;
+
+  background-color: #ffffff;
+
+  transition: border-color cubic-bezier(0.4, 0, 0.2, 1) 250ms;
+}
+
+.reload-btn:is(:hover, :focus) {
+  border-color: #000000;
+}
+
+.reload-btn a {
+  text-decoration: none;
+
+  color: #000000;
+}
+
+.cat-info {
   display: flex;
   gap: 20px;
 }
-

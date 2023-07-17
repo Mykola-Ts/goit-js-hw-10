@@ -2,6 +2,10 @@ import { selectors } from '../index';
 import { parametersRequest } from '../index';
 import axios from 'axios';
 
+/**
+ * Виконує HTTP-запит і повертає проміс із масивом порід - результатом запиту
+ * @returns {Promise} Проміс із масивом порід
+ */
 export const fetchBreeds = function fetchBreeds() {
   selectors.loader.classList.remove('visually-hidden');
 
@@ -16,12 +20,17 @@ export const fetchBreeds = function fetchBreeds() {
     });
 };
 
+/**
+ * Виконує HTTP-запит за ідентифікатором і повертає проміс із даними про кота - результатом запиту
+ * @param {String} breedId
+ * @returns {Promise} Проміс із даними про кота
+ */
 export const fetchCatByBreed = function fetchCatByBreed(breedId) {
   selectors.loader.classList.remove('visually-hidden');
 
   if (document.querySelector('#NotiflixNotifyWrap')) {
-    const error = document.querySelector('#NotiflixNotifyWrap');
-    error.remove()
+    const errorNotify = document.querySelector('#NotiflixNotifyWrap');
+    errorNotify.remove();
   }
 
   return axios

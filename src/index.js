@@ -9,6 +9,7 @@ export const selectors = {
   breedSelect: document.querySelector('.breed-select'),
   catInfo: document.querySelector('.cat-info'),
   loader: document.querySelector('.loader-wrap'),
+  error: document.querySelector('.error'),
 };
 export const parametersRequest = {
   BASE_URL: 'https://api.thecatapi.com/v1',
@@ -36,13 +37,23 @@ fetchBreeds()
       select: selectors.breedSelect,
     });
   })
-  .catch(err =>
-    Notify.failure('Oops! Something went wrong! Try reloading the page!', notifyOption)
-  )
+  .catch(err => {
+    selectors.error.classList.remove('visually-hidden');
+
+    Notify.failure(
+      'Oops! Something went wrong! Try reloading the page!',
+      notifyOption
+    );
+  })
   .finally(() => {
     selectors.loader.classList.add('visually-hidden');
   });
 
+/**
+ * Створює розмітку опцій для елемента select на основі масиву даних
+ * @param {Array} arr
+ * @returns {String} Розмітка опцій для елемента select
+ */
 function addOptionsToSelect(arr) {
   return arr
     .map(({ id, name }) => `<option value="${id}">${name}</option>`)
@@ -51,6 +62,10 @@ function addOptionsToSelect(arr) {
 
 selectors.breedSelect.addEventListener('change', onSelect);
 
+/**
+ * Виконує HTTP-запит за ідентифікатором на підставі обраної опції в breedSelect
+ * і відображає в інтерфейсі детальну інформацію на основі отриманих даних
+ */
 function onSelect() {
   const breedId = selectors.breedSelect.value;
 
@@ -59,13 +74,21 @@ function onSelect() {
       selectors.catInfo.innerHTML = createMarkup(data);
     })
     .catch(err =>
-      Notify.failure('Oops! Something went wrong! Try reloading the page!', notifyOption)
+      Notify.failure(
+        'Oops! Something went wrong! Try reloading the page!',
+        notifyOption
+      )
     )
     .finally(() => {
       selectors.loader.classList.add('visually-hidden');
     });
 }
 
+/**
+ * Створює розмітку зображення і розгорнутої інформації про кота на основі масиву даних
+ * @param {Array} arr
+ * @returns {String} Розмітка елементів
+ */
 function createMarkup(arr) {
   return arr
     .map(
