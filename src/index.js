@@ -32,6 +32,8 @@ fetchBreeds()
       'beforeend',
       addOptionsToSelect(data)
     );
+  selectors.breedSelect.classList.remove('visually-hidden');
+
 
     new SlimSelect({
       select: selectors.breedSelect,
@@ -71,6 +73,7 @@ function onSelect() {
 
   fetchCatByBreed(breedId)
     .then(data => {
+        selectors.catInfo.classList.remove('visually-hidden');
       selectors.catInfo.innerHTML = createMarkup(data);
     })
     .catch(err =>

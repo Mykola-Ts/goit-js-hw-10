@@ -34,7 +34,7 @@ body {
   width: 100vw;
   height: 100vh;
 
-  background-color: rgb(200, 200, 200);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .loader {
@@ -45,6 +45,8 @@ body {
   padding: 8px;
   border-radius: 8px;
   border: 1px solid #ffffff;
+
+  cursor: pointer;
 
   background-color: #ffffff;
 

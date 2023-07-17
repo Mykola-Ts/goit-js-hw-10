@@ -27,6 +27,7 @@ export const fetchBreeds = function fetchBreeds() {
  */
 export const fetchCatByBreed = function fetchCatByBreed(breedId) {
   selectors.loader.classList.remove('visually-hidden');
+  selectors.catInfo.classList.add('visually-hidden');
 
   if (document.querySelector('#NotiflixNotifyWrap')) {
     const errorNotify = document.querySelector('#NotiflixNotifyWrap');
